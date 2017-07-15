@@ -1,0 +1,75 @@
+h1 {
+    color: red;
+}
+
+p {
+    line-height: 1.6;
+    font-family: Helvetica;
+    text-align: justify;
+    margin: 0;
+    font-size: 14px;
+}
+
+.container {
+    padding: 50px;
+}
+
+.header-container {
+    column-count: 2;
+    column-gap: 50px;
+}
+
+.header-image {
+    float: left;
+    width: 250px;
+    height: 250px;
+    shape-outside: url('../images/battleship.jpg');
+    shape-margin: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+.grid-text{
+    font-style: italic;
+    font-size: 18px;
+}
+
+/*--------------------------------------------------------------*/
+/*--------------------------Table CSS---------------------------*/
+/*--------------------------------------------------------------*/
+#battleship-container {
+    padding: 25px;
+}
+
+.table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.table td {
+    padding: 10px 10px;
+    border-style: solid;
+    border-width: 1px;
+    overflow: hidden;
+}
+
+.table tr {
+    padding: 10px 10px;
+    border-style: solid;
+    border-width: 1px;
+    overflow: hidden;
+}
+
+.ocean {
+    background-color: blue;
+}
+
+.ship {
+    background-color: green;
+}
+.hit {
+    background-color: red;
+}
+.miss {
+    background-color: grey;
+}
