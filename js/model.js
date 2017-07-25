@@ -1,28 +1,27 @@
 'use strict';
 
+const	ocean = 'ocean';
+const hit = 'hit';
+const	miss = 'miss';
+
+
 //Sample game running
 let table = [
-	[ 1, 1, 6, 6, 1, 0, 0, 0, 7, 0 ],
-	[ 0, 0, 0, 0, 0, 0, 7, 0, 0, 7 ],
-	[ 0, 7, 0, 0, 0, 0, 0, 0, 0, 0 ],
-	[ 4, 0, 0, 7, 2, 0, 0, 7, 0, 0 ],
-	[ 4, 0, 0, 0, 2, 0, 0, 0, 0, 7 ],
-	[ 4, 7, 0, 0, 6, 0, 7, 0, 0, 0 ],
-	[ 7, 0, 0, 0, 2, 0, 0, 7, 0, 6 ],
-	[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 6 ],
-	[ 0, 6, 3, 3, 0, 0, 7, 0, 7, 0 ],
-	[ 0, 0, 7, 0, 0, 7, 0, 0, 0, 7 ]
+	[ 1, 1, 1, 1, 1, 'ocean', 'ocean', 'ocean', 'miss', 'ocean' ],
+	[ 'ocean', 'ocean', 'ocean', 'ocean', 'ocean', 'ocean', 'miss', 'ocean', 'ocean', 'miss' ],
+	[ 'ocean', 'miss', 'ocean', 'ocean', 'ocean', 'ocean', 'ocean', 'ocean', 'ocean', 'ocean' ],
+	[ 4, 'ocean', 'ocean', 'miss', 2, 'ocean', 'ocean', 'miss', 'ocean', 'ocean' ],
+	[ 4, 'ocean', 'ocean', 'ocean', 2, 'ocean', 'ocean', 'ocean', 'ocean', 'miss' ],
+	[ 4, 'miss', 'ocean', 'ocean', 2, 'ocean', 'miss', 'ocean', 'ocean', 'ocean' ],
+	[ 'miss', 'ocean', 'ocean', 'ocean', 2, 'ocean', 'ocean', 'miss', 'ocean', 5 ],
+	[ 'ocean', 'ocean', 'ocean', 'ocean', 'ocean', 'ocean', 'ocean', 'ocean', 'ocean', 5 ],
+	[ 'ocean', 3, 3, 3, 'ocean', 'ocean', 'miss', 'ocean', 'miss', 'ocean' ],
+	[ 'ocean', 'ocean', 'miss', 'ocean', 'ocean', 'miss', 'ocean', 'ocean', 'ocean', 'miss' ]
 ];
-
-let tableStates = {
-	blank: 0,
-	hit: 6,
-	miss: 7,
-};
 
 let ships = [
 	{
-		shipId: 1,
+		id: 1,
 		type: 'carrier',
 		size: 5,
 		orientation: 'horizontal',
@@ -31,7 +30,7 @@ let ships = [
 
 	},
 	{
-		shipId: 2,
+		id: 2,
 		type: 'battleship',
 		size: 4,
 		orientation: 'vertical',
@@ -40,7 +39,7 @@ let ships = [
 
 	},
 	{
-		shipId: 3,
+		id: 3,
 		type: 'submarine',
 		size: 3,
 		orientation: 'horizontal',
@@ -49,7 +48,7 @@ let ships = [
 
 	},
 	{
-		shipId: 4,
+		id: 4,
 		type: 'destroyer',
 		size: 3,
 		orientation: 'vertical',
@@ -58,7 +57,7 @@ let ships = [
 
 	},
 	{
-		shipId: 5,
+		id: 5,
 		type: 'cruiser',
 		size: 2,
 		orientation: 'vertical',
@@ -67,10 +66,7 @@ let ships = [
 
 	},
 ];
-let sunkenShips = [
-	// Not sure if I will need this or not
-	// Potential array of sunken ships
-];
+
 
 function createTableArray(height, width){
 	// Will be implemented when not showing current game state.
@@ -80,12 +76,17 @@ function createTableArray(height, width){
 		let row = [];
 
 		for(let j = 0; j < width; j++){
-			row.push(0);
+			row.push(ocean);
 		}
 
 		columns.push(row);
 	}
 	table = columns;
+	console.log(table);
+}
+
+function missShip(col, row) {
+	table[row][col] = miss;
 }
 
 function placeShip(shipName, orientation, coordinates) {
@@ -93,12 +94,41 @@ function placeShip(shipName, orientation, coordinates) {
 	//TODO: and where they choose it to be
 }
 
-function hitShip(coordinates) {
-	//TODO: Create function that sets the cell to hit table state
-	//TODO: Increments ships hits, then checks to see if ship is sunk
+function hitShip(col, row) {
+	let cell = table[row][col];
+	ships.forEach((ship) => {
+		if(ship.id === cell){
+
+			ship.hits++;
+
+			if(ship.hits === ship.maxHits){
+				alert(`You have sunken a ${ship.type}!`)
+			}
+			table[row][col] = hit;
+		}
+	})
 }
 
-function checkIfHit(coordinates) {
-	//TODO: Create functino that checks to see if the ships is in that cell
-	//TODO: Sets the cell to either miss or calls hit ship
+function checkIfHit(col, row) {
+	let cell = table[row][col];
+	if(cell !== 'ocean' && cell !== 'miss' && cell !== 'hit'){
+		hitShip(col, row);
+	}
+	else if(cell === ocean){
+		missShip(col, row)
+	}
+	else if(cell === hit){
+		alert('You already hit that part of the ship!')
+	}
+	else if(cell === miss){
+		alert('You already checked that part of the ocean!')
+	}
+}
+
+function checkCoordinates() {
+	let col = this.cellIndex;
+	let row = this.parentNode.rowIndex;
+	updateCoordinatesDisplay(col, row);
+	checkIfHit(col, row);
+	updateTable();
 }

@@ -7,10 +7,15 @@
     <link rel="stylesheet" type="text/css" href="../styles/main.css">
     <script src="../js/controller.js"></script>
     <script src="../js/model.js"></script>
+    <script src="../js/missle-controller.js"></script>
 
 </head>
-<body onload="createTable(10,10)" >
+<body onload="createTable(10,10); moveMissile()" >
+
 <div class="container">
+    <div id="missile">
+        <img id="missile-img" src="../images/missile.png">
+    </div>
     <h1>
         Game play example
     </h1>
@@ -22,6 +27,18 @@
         <li>Blue = Ocean</li>
         <li>Grey = Missed</li>
     </ul>
+    <div>
+    <p>Player Name</p>
+    <input type="text" id="player-name" placeholder="Input your name here" >
+    <p>Difficulty</p>
+    <p>Easy <input type="checkbox" value="easy" class="difficulty-checkbox"></p>
+    <p>Hard <input type="checkbox" value="hard" class="difficulty-checkbox"></p>
+    <button type="button" onclick="displayUserInput('carrier')">Place a carrier</button>
+    <button type="button" onclick="displayUserInput('submarine')">Place a submarine</button>
+    <button type="button" onclick="displayUserInput('battleship')">Place a battleship</button>
+    </div>
+    <h3>Current Cell</h3>
+    <h3 id="coordinates-display"></h3>
 
     <div id="battleship-container"></div>
 </div>
