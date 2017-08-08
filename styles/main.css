@@ -10,13 +10,49 @@ p {
     font-size: 14px;
 }
 
-.container {
-    padding: 50px;
+header nav {
+    text-align: right;
+    background: grey;
+    color: white;
+    font-size: 1em;
+    width: 100%;
+}
+header nav a {
+    color: inherit;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1em;
+    padding: 1em 1em .5em;
+    -webkit-transition: all .3s ease-in;
+}
+nav span {
+    position: absolute;
+    left: 40px;
+    padding: 1em;
+    font-weight: bold;
+    transition: all 0.5s ease-in;
 }
 
-.header-container {
-    column-count: 2;
-    column-gap: 50px;
+
+.container {
+    padding: 1em;
+    margin: 2em;
+    text-align: center;
+}
+.log-in-container > input {
+    text-align: left;
+}
+
+#user-login:hover {
+    color: red;
+}
+
+#wrong-password {
+    font-weight: bold;
+    color: red;
+    text-align: center;
+    padding-top: 10px;
+    display: none;
 }
 
 .header-image {
@@ -34,13 +70,33 @@ p {
     font-size: 18px;
 }
 
+#user-info-title{
+    font-weight: bold;
+    text-decoration: underline;
+    font-size: 16px;
+}
+
+#user-info {
+    color: red;
+}
+
+#clear-storage {
+    margin-top: 5px;
+}
+
+#clear-storage:hover {
+    color: red;
+}
+
 
 /*--------------------------------------------------------------*/
 /*--------------------------Table CSS---------------------------*/
 /*--------------------------------------------------------------*/
-#battleship-container {
-    padding: 25px;
+.battleship-container {
+    margin-left: 30em;
+    margin-right: 30em;
 }
+
 
 .table {
     border-collapse: collapse;

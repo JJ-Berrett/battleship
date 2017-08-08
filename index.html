@@ -5,58 +5,21 @@
     <title>Battleship</title>
     <link rel="icon" type="image/png" href="images/favicon.ico">
     <link rel="stylesheet" type="text/css" href="styles/main.css">
+    <script src="./js/controller.js"></script>
 </head>
 <body>
+<header>
+    <nav>
+        <span>BattleShip</span>
+        <a href="#">Welcome</a>
+        <a href="views/game.html">Game</a>
+        <a href="views/json-data.html">Json Data</a>
+    </nav>
+</header>
 <div class="container">
-    <div class="header-container">
-        <div>
-            <h1 class="text-center">Battleship</h1>
-            <img class="header-image" src="images/battleship.jpg">
-        </div>
 
-        <p>Users will be able to play battleship online against a computer AI. Battleship is a game of strategy and luck.
-            Users will place their ships in the ocean on a spacial grid representing coordinates of the ships. Once all
-            the ships have been placed the user will then choose a coordinate to launch missiles at.
-            If the user hits the opponates ship the square will be red, if not it will be yellow. A basic history of the
-            game battleship can be found <a href="https://en.wikipedia.org/wiki/Battleship_(game)"
-                                            target="_blank">here.</a> To view an example of what the game will look like please click <a href="views/grid.html">here.</a></p>
-    </div>
-
-    <h2>To see the current checkpoint of this project please click <a href="views/checkpoint.html">here</a><h2>
-
-    <h2>Software Design</h2>
-    <h3>Game</h3>
-    <p>Player wil be facing a computer for the game of battle ship,
-    the computers ships will be randomly placed, the user will be able to
-    choose where they want their ships place</p>
-    <h3>Ships Object</h3>
-    <ul>
-        <li>shipID: Unique id for ship</li>
-        <li>type: ship type. Example: Carrier</li>
-        <li>size: How big the ship is</li>
-        <li>orientation: Vertical or Horizontal, Position the ship is oriented.</li>
-        <li>hits: How many times the ship has been hit</li>
-        <li>maxHits: Amount of hits before the ship is sunk</li>
-    </ul>
-    <h3>tableStates object</h3>
-    <ul>
-        <li>blanks: 0</li>
-        <li>hit: 6</li>
-        <li>miss: 7</li>
-    </ul>
-    <h3>Table Array</h3>
-    <p>2D array with columns and rows for the table</p>
-    <h2>Functions/Methods</h2>
-    <h3>createTableArray(height, width)</h3>
-    <p>Table constructor that creates a table array setting all values to 0</p>
-    <h3>placeShip(shipName, orientation, coordinates)</h3>
-    <p>Sets the ship in the table array based off of id and coordinates</p>
-    <h3>checkIfHit(coordinates)</h3>
-    <p>Checks to see if the coordnates contain a ship and calls the ship hit func or sets the square to missed state</p>
-    <h3>hitShip(coordinates)</h3>
-    <p>Finds ship in array of ships, increments hits on object, changes square to hit state</p>
-    <h3>UpdateTable()</h3>
-    <p>Updates the table to the table array after events happen. (hit, miss)</p>
+   <h1>Battleship</h1>
+    <h3>Created By Gerald Berrett</h3>
 </div>
 </body>
 </html>

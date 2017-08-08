@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Battleship</title>
+    <link rel="icon" type="image/png" href="../images/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="../styles/main.css">
+    <script src="../js/controller.js"></script>
+    <script src="../js/model.js"></script>
+
+</head>
+<body onload="getGameData();">
+<header>
+<nav>
+    <span>BattleShip</span>
+    <a href="../index.html">Welcome</a>
+    <a href="../views/game.html">Game</a>
+    <a href="../views/json-data.html">Json Data</a>
+</nav>
+</header>
+
+<div class="container">
+
+    <div>
+        <!--<h3 id="coordinates-display"></h3>-->
+        <div>
+            <h3>Computer's Grid</h3>
+            <div class="battleship-container" id="computer"></div>
+            <h3>Player's Grid</h3>
+            <div class="battleship-container" id="user"></div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
