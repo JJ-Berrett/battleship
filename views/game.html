@@ -9,7 +9,7 @@
     <script src="../js/model.js"></script>
 
 </head>
-<body onload="getGameData();">
+<body onload="getGameData()">
 <header>
 <nav>
     <span>BattleShip</span>
@@ -19,17 +19,13 @@
 </nav>
 </header>
 
-<div class="container">
-
-    <div>
-        <!--<h3 id="coordinates-display"></h3>-->
+<div class="game-container">
         <div>
             <h3>Computer's Grid</h3>
-            <div class="battleship-container" id="computer"></div>
-            <h3>Player's Grid</h3>
-            <div class="battleship-container" id="user"></div>
+            <div id="computer-grid"></div>
+            <h3 id="playerName"></h3>
+            <div id="user-grid"></div>
         </div>
-    </div>
 </div>
 
 </body>

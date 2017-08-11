@@ -1,16 +1,16 @@
 {
   "user": {
     "table": [
-      [1, 1, 1, 1, 1, "ocean", "ocean", "ocean", "miss", "ocean"],
-      ["ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "miss", "ocean", "ocean", "miss"],
-      ["ocean", "miss", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean"],
-      ["hit", "ocean", "ocean", "miss", 2, "ocean", "ocean", "miss", "ocean", "ocean"],
-      ["hit", "ocean", "ocean", "ocean", 2, "ocean", "ocean", "ocean", "ocean", "miss"],
-      ["hit", "miss", "ocean", "ocean", 2, "ocean", "miss", "ocean", "ocean", "ocean"],
-      ["miss", "ocean", "ocean", "ocean", 2, "ocean", "ocean", "miss", "ocean", 5],
+      [1, 1, 1, 1, 1, "ocean", "ocean", "ocean", "ocean", "ocean"],
+      ["ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean"],
+      ["ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean"],
+      [2, "ocean", "ocean", "ocean", 4, "ocean", "ocean", "ocean", "ocean", "ocean"],
+      [2, "ocean", "ocean", "ocean", 4, "ocean", "ocean", "ocean", "ocean", "ocean"],
+      [2, "ocean", "ocean", "ocean", 4, "ocean", "ocean", "ocean", "ocean", "ocean"],
+      [2, "ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean", 5],
       ["ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean", 5],
-      ["ocean", 3, 3, 3, "ocean", "ocean", "miss", "ocean", "miss", "ocean"],
-      ["ocean", "ocean", "miss", "ocean", "ocean", "miss", "ocean", "ocean", "ocean", "miss"]
+      ["ocean", 3, 3, 3, "ocean", "ocean", "ocean", "ocean", "ocean", "ocean"],
+      ["ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean"]
     ],
     "ships": [
       {
@@ -45,7 +45,7 @@
         "type": "destroyer",
         "size": 3,
         "orientation": "vertical",
-        "hits": 4,
+        "hits": 0,
         "maxHits": 3
 
       },
@@ -58,20 +58,23 @@
         "maxHits": 2
 
       }
-    ]
+    ],
+    "destroyedShips": 0,
+    "totalShips": 5
+
   },
   "computer": {
     "table": [
-      [1, 1, 1, "hit", 1, "ocean", "ocean", "ocean", "miss", "ocean"],
-      ["ocean", "ocean", "ocean", "ocean", "ocean", "miss", "miss", "ocean", "ocean", "miss"],
-      ["miss", "miss", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean"],
-      ["hit", "ocean", "miss", "miss", 2, "ocean", "ocean", "miss", "ocean", "ocean"],
-      ["hit", "ocean", "ocean", "ocean", 2, "ocean", "ocean", "ocean", "ocean", "miss"],
-      ["hit", "miss", "ocean", "ocean", 2, "ocean", "miss", "ocean", "ocean", "ocean"],
-      ["miss", "ocean", "ocean", "ocean", 2, "ocean", "ocean", "miss", "ocean", "hit"],
-      ["ocean", "ocean", "miss", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean", 5],
-      ["ocean", 3, "hit", 3, "ocean", "ocean", "miss", "ocean", "miss", "ocean"],
-      ["ocean", "ocean", "miss", "ocean", "ocean", "miss", "ocean", "ocean", "ocean", "miss"]
+      [1, 1, 1, 1, 1, "ocean", "ocean", "ocean", "ocean", "ocean"],
+      ["ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean"],
+      ["ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean"],
+      [2, "ocean", "ocean", "ocean", 4, "ocean", "ocean", "ocean", "ocean", "ocean"],
+      [2, "ocean", "ocean", "ocean", 4, "ocean", "ocean", "ocean", "ocean", "ocean"],
+      [2, "ocean", "ocean", "ocean", 4, "ocean", "ocean", "ocean", "ocean", "ocean"],
+      [2, "ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean", 5],
+      ["ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean", 5],
+      ["ocean", 3, 3, 3, "ocean", "ocean", "ocean", "ocean", "ocean", "ocean"],
+      ["ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean"]
     ],
     "ships": [
       {
@@ -79,7 +82,7 @@
         "type": "carrier",
         "size": 5,
         "orientation": "horizontal",
-        "hits": 1,
+        "hits": 0,
         "maxHits": 5
 
       },
@@ -97,7 +100,7 @@
         "type": "submarine",
         "size": 3,
         "orientation": "horizontal",
-        "hits": 1,
+        "hits": 0,
         "maxHits": 3
 
       },
@@ -106,7 +109,7 @@
         "type": "destroyer",
         "size": 3,
         "orientation": "vertical",
-        "hits": 4,
+        "hits": 0,
         "maxHits": 3
 
       },
@@ -115,9 +118,11 @@
         "type": "cruiser",
         "size": 2,
         "orientation": "vertical",
-        "hits": 1,
+        "hits": 0,
         "maxHits": 2
       }
-    ]
+    ],
+    "destroyedShips": 0,
+    "totalShips": 5
   }
 }

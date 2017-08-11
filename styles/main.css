@@ -34,13 +34,33 @@ nav span {
 }
 
 
-.container {
+
+.game-container {
     padding: 1em;
-    margin: 2em;
+    margin: auto;
     text-align: center;
 }
-.log-in-container > input {
-    text-align: left;
+
+.welcome-container {
+    padding-top: 5em;
+    margin-left: 40%;
+    margin-right: 40%;
+    text-align: center;
+    display: inline-block;
+}
+
+.player-name-input {
+    display: block ;
+    box-sizing: border-box;
+    margin-top: 5%;
+    margin-left: 4em;
+}
+
+.play-button {
+    display: block ;
+    box-sizing: border-box;
+    margin-top: 5%;
+    margin-left: 7.5em;
 }
 
 #user-login:hover {
