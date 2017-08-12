@@ -4,32 +4,17 @@ const ocean = 'ocean';
 const hit = 'hit';
 const miss = 'miss';
 let request;
-let players;
-
-let finder = {
-	continue: false,
-	cellToBeChecked: {
-		row: 0,
-		col: 0,
-	},
-	originalCell: {
-		row: 0,
-		col: 0,
-	},
-	grid: {
-		up: true,
-		down: true,
-		left: true,
-		right: true,
-	}
-};
-
+let gameData;
+let finder;
 
 function getGameData() {
 	request = new XMLHttpRequest();
 	request.onreadystatechange = function () {
 		if (this.readyState === 4 && this.status === 200) {
-			players = JSON.parse(this.responseText);
+			gameData = JSON.parse(this.responseText);
+			saveToStorage('computer', gameData.computer);
+			saveToStorage('user', gameData.user);
+			finder = gameData.finder;
 			createTable(10, 10);
 		}
 	};
@@ -37,24 +22,16 @@ function getGameData() {
 	request.send();
 }
 
-function createTableArray(height, width) {
-	let columns = [];
+//======================================//
+//=========Local Storage Manager========//
+//======================================//
 
-	for (let i = 0; i < height; i++) {
-		let row = [];
-
-		for (let j = 0; j < width; j++) {
-			row.push(ocean);
-		}
-
-		columns.push(row);
-	}
-	players.computer.table = columns;
-	players.user.table = columns;
+function getFromStorage(key) {
+	return JSON.parse(localStorage.getItem(key));
 }
 
-function placeShips(shipName, orientation, coordinates) {
-
+function saveToStorage(key, object) {
+	localStorage.setItem(key, JSON.stringify(object))
 }
 
 //===============================//
@@ -63,7 +40,10 @@ function placeShips(shipName, orientation, coordinates) {
 
 
 function missShip(row, col, player) {
-	players[player].table[row][col] = miss;
+	let playerObject = getFromStorage(player);
+	playerObject.table[row][col] = miss;
+	saveToStorage(player, playerObject);
+
 	if (player === 'user') {
 		updateUserTable();
 	}
@@ -73,9 +53,9 @@ function missShip(row, col, player) {
 }
 
 function hitShip(row, col, player) {
-	let table = players[player].table;
-	let cell = table[row][col];
-	players[player].ships.forEach((ship) => {
+	let playerObject = getFromStorage(player);
+	let cell = playerObject.table[row][col];
+	playerObject.ships.forEach((ship) => {
 		if (ship.id === cell) {
 
 			ship.hits++;
@@ -87,25 +67,27 @@ function hitShip(row, col, player) {
 				}
 				else {
 					alert(`${player}'s ${ship.type} has been destroyed!`);
-					ship.destroyed++;
+					playerObject.destroyedShips++;
 				}
 			}
-
-			table[row][col] = hit;
+			playExplosion();
+			playerObject.table[row][col] = hit;
 		}
 	});
 
 	//Check to see if the user has won the game
-	if (players[player].destroyedShips === players[player].totalShips) {
+	if (playerObject.destroyedShips === playerObject.totalShips) {
 		if (player === 'user') {
-			updateUserTable();
 			alert(`${localStorage.getItem('username')}' has won the game!!`);
+			return gameOver();
 		}
 		else {
-			alert(`${player}'s ${ship.type} has won the game!!!`);
-			updateComputerTable();
+			alert(`${player} has won the game!!!`);
+			return gameOver();
 		}
 	}
+
+	saveToStorage(player, playerObject);
 
 	//Update the grid
 	if (player === 'user') {
@@ -122,7 +104,8 @@ function hitShip(row, col, player) {
 
 
 function checkComputer(row, col) {
-	let cell = players.computer.table[row][col];
+	let table = getFromStorage('computer').table;
+	let cell = table[row][col];
 	if (cell !== 'ocean' && cell !== 'miss' && cell !== 'hit') {
 		hitShip(row, col, 'computer');
 	}
@@ -146,8 +129,13 @@ function checkCoordinates() {
 	let result = checkComputer(row, col);
 
 	// Computers Turn
+
 	if (result !== 'retry') {
-		findUsersShips();
+		document.getElementById('turn').innerHTML = "Computer's Turn";
+		setTimeout(function () {
+			document.getElementById('turn').innerHTML = "Your Turn";
+			return findUsersShips();
+		}, 100);
 	}
 }
 
@@ -160,10 +148,11 @@ function checkCoordinates() {
 //===========Check User's Grid==================//
 
 function checkUserCell(row, col) {
+	let table = getFromStorage('user').table;
 	let cell;
 
 	if (row >= 0 && row !== 10 && col >= 0 && col !== 10) {
-		cell = players.user.table[row][col];
+		cell = table[row][col];
 		if (cell !== 'ocean' && cell !== 'miss' && cell !== 'hit') {
 			hitShip(row, col, 'user');
 			return 'hit';
@@ -198,29 +187,25 @@ function findUsersShips() {
 
 		checkedResult = checkUserCell(row, col);
 
-		if (checkedResult === 'alreadyMissed') {
+		if (checkedResult === 'alreadyMissed' || checkedResult === 'alreadyHit') {
 			return findUsersShips();
 		} else if (checkedResult === 'miss') {
-
 			return;
 		}
 		else if (checkedResult === 'hit') {
 			finder.continue = true;
-
 			return;
 		}
 	}
-
 	return checkNextSquare();
 }
 
-//Logic to continue searching once Hit//
+//====Logic to continue searching once Hit======//
 
 function resetCellToBeChecked() {
 	finder.cellToBeChecked.row = finder.originalCell.row;
 	finder.cellToBeChecked.col = finder.originalCell.col;
 }
-
 
 function checkNextSquare() {
 	if (finder.grid.up) {
@@ -252,7 +237,7 @@ const search = {
 		if (result === 'outOfBounds' || result === 'alreadyMissed') {
 			finder.grid.up = false;
 			resetCellToBeChecked();
-			return checkNextSquare();
+			checkNextSquare();
 		}
 		else if (result === 'miss') {
 			finder.grid.up = false;
@@ -261,7 +246,7 @@ const search = {
 		else if (result === 'alreadyHit') {
 			finder.grid.up = false;
 			resetCellToBeChecked();
-			return checkNextSquare();
+			checkNextSquare();
 		}
 
 	},
@@ -272,7 +257,7 @@ const search = {
 		if (result === 'outOfBounds' || result === 'alreadyMissed') {
 			finder.grid.down = false;
 			resetCellToBeChecked();
-			return checkNextSquare();
+			checkNextSquare();
 		}
 		else if (result === 'miss') {
 			finder.grid.down = false;
@@ -281,26 +266,7 @@ const search = {
 		else if (result === 'alreadyHit') {
 			finder.grid.down = false;
 			resetCellToBeChecked();
-			return checkNextSquare();
-		}
-	},
-	right: function () {
-		finder.cellToBeChecked.col += 1;
-		let result = checkUserCell(finder.cellToBeChecked.row, finder.cellToBeChecked.col);
-
-		if (result === 'outOfBounds' || result === 'alreadyMissed') {
-			finder.grid.right = false;
-			resetCellToBeChecked();
-			return checkNextSquare();
-		}
-		else if (result === 'miss') {
-			finder.grid.right = false;
-			return resetCellToBeChecked();
-		}
-		else if (result === 'alreadyHit') {
-			finder.grid.right = false;
-			resetCellToBeChecked();
-			return checkNextSquare();
+			checkNextSquare();
 		}
 	},
 	left: function () {
@@ -310,7 +276,7 @@ const search = {
 		if (result === 'outOfBounds' || result === 'alreadyMissed') {
 			finder.grid.left = false;
 			resetCellToBeChecked();
-			return checkNextSquare();
+			checkNextSquare();
 		}
 		else if (result === 'miss') {
 			finder.grid.left = false;
@@ -319,13 +285,42 @@ const search = {
 		else if (result === 'alreadyHit') {
 			finder.grid.left = false;
 			resetCellToBeChecked();
-			return checkNextSquare();
+			checkNextSquare();
 		}
-	}
+	},
+	right: function () {
+		finder.cellToBeChecked.col += 1;
+		let result = checkUserCell(finder.cellToBeChecked.row, finder.cellToBeChecked.col);
+
+		if (result === 'outOfBounds' || result === 'alreadyMissed') {
+			finder.grid.right = false;
+			resetCellToBeChecked();
+			checkNextSquare();
+		}
+		else if (result === 'miss') {
+			finder.grid.up = true;
+			finder.grid.down = true;
+			finder.grid.left = true;
+			finder.grid.right = true;
+			finder.continue = false;
+		}
+		else if (result === 'alreadyHit') {
+			finder.grid.up = true;
+			finder.grid.down = true;
+			finder.grid.left = true;
+			finder.grid.right = true;
+			finder.continue = false;
+		}
+	},
 };
 
-// function run() {
-// 	checkUserCell(5, -1)
-// }
-//
-// run();
+
+function playExplosion() {
+	let x = document.getElementById("explosion");
+	x.play();
+}
+
+function playWinner() {
+	let x = document.getElementById("winner");
+	x.play();
+}

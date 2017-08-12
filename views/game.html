@@ -10,18 +10,24 @@
 
 </head>
 <body onload="getGameData()">
+<audio id="explosion">
+    <source src="../media/explosion.mp3" type="audio/mpeg">
+</audio>
+<audio id="winner">
+    <source src="../media/submarine.mp3" type="audio/mpeg">
+</audio>
 <header>
 <nav>
     <span>BattleShip</span>
-    <a href="../index.html">Welcome</a>
-    <a href="../views/game.html">Game</a>
+    <a href="../index.html">Home</a>
     <a href="../views/json-data.html">Json Data</a>
 </nav>
 </header>
 
 <div class="game-container">
         <div>
-            <h3>Computer's Grid</h3>
+            <h2 id="turn">Your Turn</h2>
+            <h3 id="computerName">Computer's Grid</h3>
             <div id="computer-grid"></div>
             <h3 id="playerName"></h3>
             <div id="user-grid"></div>

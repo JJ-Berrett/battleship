@@ -21,16 +21,24 @@ function makeTableInteractive(id) {
 		cells[i].onclick = checkCoordinates;
 	}
 }
+function deactivateTableInteraction(id) {
+	let div = document.getElementById(id);
+	let cells = div.getElementsByTagName("td");
+	for (let i = 0; i < cells.length; i++) {
+		cells[i].onclick = null;
+	}
+}
 
 
 function updateComputerTable() {
 	let div = document.getElementById('computer-grid');
 	let tableHtml = '<table class="table" align="center" id="computer">';
+	let table = getFromStorage('computer').table;
 
 	for (let i = 0; i < WIDTH; i++) {
 		tableHtml += '<tr>';
 		for (let j = 0; j < HEIGHT; j++) {
-			let cell = players.computer.table[i][j];
+			let cell = table[i][j];
 
 			if (cell !== 'hit' && cell !== 'miss' && cell !== 'ocean')
 				tableHtml += '<td class="ocean"></td>';
@@ -53,11 +61,11 @@ function updateComputerTable() {
 function updateUserTable() {
 	let div = document.getElementById('user-grid');
 	let tableHtml = '<table class="table" align="center" id ="user">';
-
+	let table = getFromStorage('user').table;
 	for (let i = 0; i < WIDTH; i++) {
 		tableHtml += '<tr>';
 		for (let j = 0; j < HEIGHT; j++) {
-			let cell = players.user.table[i][j];
+			let cell = table[i][j];
 
 			if (cell !== 'hit' && cell !== 'miss' && cell !== 'ocean')
 				tableHtml += '<td class="ship"></td>';
@@ -81,9 +89,14 @@ function play() {
 	localStorage.setItem('username', userName);
 	document.location.href = 'views/game.html';
 }
-
-
-function clearStorage() {
+function gameOver() {
 	localStorage.clear();
-	document.getElementById('playerName').innerHTML = "No player name in local storage";
+	document.getElementById('playerName').innerHTML = "Game Over";
+	document.getElementById('turn').innerHTML = "Game Over";
+	document.getElementById('computerName').innerHTML = "Game Over";
+	deactivateTableInteraction('computer');
+	playWinner();
+	setTimeout(function () {
+		document.location.href = '../index.html';
+	}, 8000);
 }

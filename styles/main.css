@@ -49,18 +49,38 @@ nav span {
     display: inline-block;
 }
 
+.welcome-container > p {
+    text-align: center;
+}
+
+.documentation-container {
+    padding-top: 5em;
+    margin-left: 5em;
+    text-align: left;
+
+    display: inline-block;
+}
+
+.documentation-container > p {
+    padding-top: 1.5em;
+}
+
+#player-title {
+    color: red;
+}
+
 .player-name-input {
     display: block ;
     box-sizing: border-box;
     margin-top: 5%;
-    margin-left: 4em;
+    margin-left: 4.5em;
 }
 
 .play-button {
     display: block ;
     box-sizing: border-box;
     margin-top: 5%;
-    margin-left: 7.5em;
+    margin-left: 6.5em;
 }
 
 #user-login:hover {

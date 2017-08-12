@@ -1,4 +1,21 @@
 {
+  "finder": {
+    "continue": false,
+    "cellToBeChecked": {
+      "row": 0,
+      "col": 0
+    },
+    "originalCell": {
+      "row": 0,
+      "col": 0
+    },
+    "grid": {
+      "up": true,
+      "down": true,
+      "left": true,
+      "right": true
+    }
+  },
   "user": {
     "table": [
       [1, 1, 1, 1, 1, "ocean", "ocean", "ocean", "ocean", "ocean"],
