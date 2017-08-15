@@ -1,0 +1,145 @@
+{
+  "finder": {
+    "continue": false,
+    "cellToBeChecked": {
+      "row": 0,
+      "col": 0
+    },
+    "originalCell": {
+      "row": 0,
+      "col": 0
+    },
+    "grid": {
+      "up": true,
+      "down": true,
+      "left": true,
+      "right": true
+    }
+  },
+  "user": {
+    "table": [
+      [1, 1, 1, 1, 1, "ocean", "ocean", "ocean", "ocean", "ocean"],
+      ["ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean"],
+      ["ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean"],
+      [2, "ocean", "ocean", "ocean", 4, "ocean", "ocean", "ocean", "ocean", "ocean"],
+      [2, "ocean", "ocean", "ocean", 4, "ocean", "ocean", "ocean", "ocean", "ocean"],
+      [2, "ocean", "ocean", "ocean", 4, "ocean", "ocean", "ocean", "ocean", "ocean"],
+      [2, "ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean", 5],
+      ["ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean", 5],
+      ["ocean", 3, 3, 3, "ocean", "ocean", "ocean", "ocean", "ocean", "ocean"],
+      ["ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean"]
+    ],
+    "ships": [
+      {
+        "id": 1,
+        "type": "carrier",
+        "size": 5,
+        "orientation": "horizontal",
+        "hits": 0,
+        "maxHits": 5
+
+      },
+      {
+        "id": 2,
+        "type": "battleship",
+        "size": 4,
+        "orientation": "vertical",
+        "hits": 0,
+        "maxHits": 4
+
+      },
+      {
+        "id": 3,
+        "type": "submarine",
+        "size": 3,
+        "orientation": "horizontal",
+        "hits": 0,
+        "maxHits": 3
+
+      },
+      {
+        "id": 4,
+        "type": "destroyer",
+        "size": 3,
+        "orientation": "vertical",
+        "hits": 0,
+        "maxHits": 3
+
+      },
+      {
+        "id": 5,
+        "type": "cruiser",
+        "size": 2,
+        "orientation": "vertical",
+        "hits": 0,
+        "maxHits": 2
+
+      }
+    ],
+    "destroyedShips": 0,
+    "totalShips": 5
+
+  },
+  "computer": {
+    "table": [
+      [1, 1, 1, 1, 1, "ocean", "ocean", "ocean", "ocean", "ocean"],
+      ["ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean"],
+      ["ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean"],
+      [2, "ocean", "ocean", "ocean", 4, "ocean", "ocean", "ocean", "ocean", "ocean"],
+      [2, "ocean", "ocean", "ocean", 4, "ocean", "ocean", "ocean", "ocean", "ocean"],
+      [2, "ocean", "ocean", "ocean", 4, "ocean", "ocean", "ocean", "ocean", "ocean"],
+      [2, "ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean", 5],
+      ["ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean", 5],
+      ["ocean", 3, 3, 3, "ocean", "ocean", "ocean", "ocean", "ocean", "ocean"],
+      ["ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean", "ocean"]
+    ],
+    "ships": [
+      {
+        "id": 1,
+        "type": "carrier",
+        "size": 5,
+        "orientation": "horizontal",
+        "hits": 0,
+        "maxHits": 5
+
+      },
+      {
+        "id": 2,
+        "type": "battleship",
+        "size": 4,
+        "orientation": "vertical",
+        "hits": 0,
+        "maxHits": 4
+
+      },
+      {
+        "id": 3,
+        "type": "submarine",
+        "size": 3,
+        "orientation": "horizontal",
+        "hits": 0,
+        "maxHits": 3
+
+      },
+      {
+        "id": 4,
+        "type": "destroyer",
+        "size": 3,
+        "orientation": "vertical",
+        "hits": 0,
+        "maxHits": 3
+
+      },
+      {
+        "id": 5,
+        "type": "cruiser",
+        "size": 2,
+        "orientation": "vertical",
+        "hits": 0,
+        "maxHits": 2
+      }
+    ],
+    "destroyedShips": 0,
+    "totalShips": 5
+  }
+}
